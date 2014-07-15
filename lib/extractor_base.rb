@@ -18,7 +18,7 @@ module ReadyForI18N
     
     def extract(input)
       buffer = StringIO.new
-      input.each do |line|
+      input.each_line do |line|
         unless skip_line?(line)
           values_in_line(line).each do |e|
             if can_replace?(e)
