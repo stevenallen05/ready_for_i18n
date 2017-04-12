@@ -4,11 +4,18 @@ module ReadyForI18N
       @locale = locale || 'en'
       @hash = {}
     end
-    def push(key,value,path = nil)
+
+    def push(key, value, path = nil)
       h = @hash
-      path.each{|p| h[p] ||= {}; h = h[p] } if path
+
+      path.each do |p|
+        h[p] ||= {}
+        h = h[p]
+      end if path
+
       h[key] = value
     end
+
     def write_to(out)
       # out.puts "#{@locale}:"
       $KCODE = 'UTF8'
