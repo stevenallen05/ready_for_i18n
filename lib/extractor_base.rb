@@ -2,24 +2,22 @@ require 'stringio'
 
 module ReadyForI18N
   module ExtractorBase
-    class << self
-      def use_dot(on_off)
-        @use_dot = on_off
-      end
-
-      def use_dot?
-        @use_dot
-      end
-
-      def key_mapper=(mapper)
-        @key_mapper = mapper
-      end
-
-      def key_mapper
-        @key_mapper
-      end
+    def self.use_dot(on_off)
+      @use_dot = on_off
     end
-    
+
+    def self.use_dot?
+      @use_dot
+    end
+
+    def self.key_mapper=(mapper)
+      @key_mapper = mapper
+    end
+
+    def self.key_mapper
+      @key_mapper
+    end
+
     def extract(input)
       buffer = StringIO.new
 
