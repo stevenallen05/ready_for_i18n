@@ -7,7 +7,7 @@ module ReadyForI18N
 
     def push(key, value, path = nil)
       h = @hash
-
+      p [key, value, path]
       path.each do |p|
         h[p] ||= {}
         h = h[p]
@@ -18,7 +18,6 @@ module ReadyForI18N
 
     def write_to(out)
       # out.puts "#{@locale}:"
-      $KCODE = 'UTF8'
       out.puts({"#{@locale}" => @hash}.ya2yaml)
     end
   end

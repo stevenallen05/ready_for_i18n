@@ -50,7 +50,7 @@ module ReadyForI18N
     def replace_line(line, e)
       repeat = line.scan(e).size
       replaced = t_method(e, true)
-
+      p [line, e, replaced]
       return line if repeat == 0
       return line.sub!(e.strip, replaced) if repeat == 1
 
@@ -61,7 +61,7 @@ module ReadyForI18N
     end
 
     def key_prefix
-      'text'
+      ENV.fetch('I18N_KEY_PREFIX', 'text')
     end
   end
 end

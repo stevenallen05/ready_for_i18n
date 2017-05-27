@@ -81,6 +81,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
     s.add_dependency(%q<ya2yaml>, [">= 0.26"])
+    s.add_dependency(%q<pry>, [">= 0"])
   end
 end
 

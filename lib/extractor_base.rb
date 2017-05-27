@@ -44,11 +44,11 @@ module ReadyForI18N
     def to_key(s)
       val = to_value(s)
 
-      result =
-        (ExtractorBase.key_mapper) ?
-            ExtractorBase.key_mapper.key_for(val) :
-            val.scan(/\w+/).join('_').downcase
-
+      result = if ExtractorBase.key_mapper
+                 ExtractorBase.key_mapper.key_for(val)
+               else
+                 val.scan(/\w+/).join('_').downcase
+               end
       "#{"#{key_prefix}_" if key_prefix}#{result}"
     end
 
@@ -57,7 +57,9 @@ module ReadyForI18N
     end
 
     def t_method(val, wrap = false)
-      m = ExtractorBase.use_dot? ? "t('.#{to_key(val)}')" : "t(:#{to_key(val)})"
+      t = ENV.fetch("I18N_T_METHOD", 'I18n.t')
+      m = ExtractorBase.use_dot? ? "#{t}('.#{to_key(val)}')" : "#{t}(:#{to_key(val)})"
+puts m
       wrap ? "<%=#{m}%>" : m
     end
   end

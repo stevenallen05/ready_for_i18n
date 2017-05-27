@@ -2,7 +2,7 @@ module ReadyForI18N
   class I18nGenerator
     EXTRACTORS = [ErbHelperExtractor,HtmlTextExtractor,HtmlAttrExtractor]
     PATH_PATTERN = /\/views\/(.*)/
-    
+
     def self.excute(opt)
       setup_options(opt)
 
