@@ -57,9 +57,9 @@ module ReadyForI18N
     end
 
     def t_method(val, wrap = false)
-      t = ENV.fetch("I18N_T_METHOD", 'I18n.t')
-      m = ExtractorBase.use_dot? ? "#{t}('.#{to_key(val)}')" : "#{t}(:#{to_key(val)})"
-puts m
+      t = ENV.fetch("I18N_T_METHOD", 't')
+      key = to_key(val)
+      m = ExtractorBase.use_dot? ? "#{t}('.#{key}')" : "#{t}('#{key}')"
       wrap ? "<%=#{m}%>" : m
     end
   end

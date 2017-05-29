@@ -72,10 +72,17 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<shoulda>, [">= 0"])
+      s.add_development_dependency(%q<rake>, [">= 10"])
+      s.add_development_dependency(%q<jeweler>, [">= 1"])
+      s.add_development_dependency(%q<minitest>, [">= 0"])
+      s.add_development_dependency(%q<minitest-spec-rails>, [">= 0"])
+      # s.add_development_dependency(%q<test-unit>, [">= 3.2"])
+      s.add_development_dependency(%q<pry>, [">= 0"])
+      s.add_development_dependency(%q<rdoc>, [">= 0"])
       s.add_runtime_dependency(%q<ya2yaml>, [">= 0.26"])
     else
-      s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
+      s.add_development_dependency(%q<minitest>, [">= 0"])
+      s.add_development_dependency(%q<minitest_shoulda>, [">= 0"])
       s.add_dependency(%q<ya2yaml>, [">= 0.26"])
     end
   else

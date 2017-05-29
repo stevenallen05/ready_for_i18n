@@ -33,9 +33,9 @@ module ReadyForI18N
       @stack.push jump_in_tag[1] if jump_in_tag
 
       unless @stack.empty?
-        end_tag_match = s.match(@stack.last) 
+        end_tag_match = s.match(@stack.last)
         if end_tag_match
-          @stack.pop 
+          @stack.pop
           return skip_line?(end_tag_match.post_match)
         end
       end
@@ -50,7 +50,6 @@ module ReadyForI18N
     def replace_line(line, e)
       repeat = line.scan(e).size
       replaced = t_method(e, true)
-      p [line, e, replaced]
       return line if repeat == 0
       return line.sub!(e.strip, replaced) if repeat == 1
 

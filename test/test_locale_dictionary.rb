@@ -2,8 +2,8 @@ require 'helper'
 require 'stringio'
 require 'yaml'
 
-class TestLocaleDictionary < Test::Unit::TestCase
-  should "save the result hash to yaml file" do
+describe 'TestLocaleDictionary' do
+  it "should save the result hash to yaml file" do
     locale_file = File.join(File.dirname(__FILE__),'output','en.yml')
     
     dict = ReadyForI18N::LocaleDictionary.new
@@ -20,7 +20,7 @@ class TestLocaleDictionary < Test::Unit::TestCase
     assert_equal("It is my \"Label\"", result['en']['with_quote'])
   end
   
-  should "output to STDOUT when write to is nil" do
+  it "should output to STDOUT when write to is nil" do
     dict = ReadyForI18N::LocaleDictionary.new
     dict.push 'label','OK'
     out = StringIO.new
@@ -29,7 +29,7 @@ class TestLocaleDictionary < Test::Unit::TestCase
     assert_equal("OK", hash['en']['label'])
   end
   
-  should "should intent output when path is given" do 
+  it "should should intent output when path is given" do 
     dict = ReadyForI18N::LocaleDictionary.new
     dict.push 'label','OK',['my_view']
     out = StringIO.new
@@ -38,7 +38,7 @@ class TestLocaleDictionary < Test::Unit::TestCase
     assert_equal("OK",hash['en']['my_view']['label'])
   end
 
-  should "handle Chinese character as well" do 
+  it "should handle Chinese character as well" do 
     dict = ReadyForI18N::LocaleDictionary.new('zh_CN')
     dict.push '中文','没问题'
     out = StringIO.new

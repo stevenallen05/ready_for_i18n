@@ -1,9 +1,9 @@
 require 'helper'
 require 'stringio'
 
-class TestNoKeyDictionary < Test::Unit::TestCase
+describe 'TestNoKeyDictionary' do
   
-  should "output to STDOUT when write to is nil" do
+  it "should output to STDOUT when write to is nil" do
     dict = ReadyForI18N::NoKeyDictionary.new
     dict.push 'label','OK'
     out = StringIO.new
@@ -11,7 +11,7 @@ class TestNoKeyDictionary < Test::Unit::TestCase
     assert_equal("OK\n", out.string)
   end
 
-  should "two same string will only generate one line" do
+  it "should two same string will only generate one line" do
     dict = ReadyForI18N::NoKeyDictionary.new
     dict.push 'Key 1','Same Value:'
     dict.push 'Key 2','Same Value:'
@@ -21,7 +21,7 @@ class TestNoKeyDictionary < Test::Unit::TestCase
     assert_equal("Same Value:\nDifferent Value:\n", out.string)
   end
 
-  should "skip the empty string" do
+  it "should skip the empty string" do
     dict = ReadyForI18N::NoKeyDictionary.new
     dict.push 'Key 1','Some Value'
     dict.push 'Key 2','  '

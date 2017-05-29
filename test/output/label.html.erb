@@ -22,11 +22,11 @@
               <td class="left" valign="top"><%=user.login %></td>
               <td class="left" valign="top"><%=user.name %></td>
               <td class="left" valign="top">
-                <%= user.groups.sort.map(&:name).join(', ') %> (<%= link_to t(:label_select), {:action => 'select_group', :id => user.id}, :id => "select-#{u user.login}" %>)
+                <%= user.groups.sort.map(&:name).join(', ') %> (<%= link_to t('label_select'), {:action => 'select_group', :id => user.id}, :id => "select-#{u user.login}" %>)
               </td>
               <td class="left" valign="top">
-                <%= link_to t(:label_edit), { :id => user.id, :action => 'edit'}, :id => "edit-#{u user.login}" %> |
-                <%= link_to t(:label_delete), {:action => 'destroy', :id => user.id}, {:confirm => "Warning : are you sure to delete this user ?", :method => 'delete', :id => "delete-#{u user.login}"} %>
+                <%= link_to t('label_edit'), { :id => user.id, :action => 'edit'}, :id => "edit-#{u user.login}" %> |
+                <%= link_to t('label_delete'), {:action => 'destroy', :id => user.id}, {:confirm => "Warning : are you sure to delete this user ?", :method => 'delete', :id => "delete-#{u user.login}"} %>
               </td>
             </tr>
           <% end %>
@@ -71,7 +71,7 @@
         <tr>
           <td class="left"  nowrap="nowrap" valign="top" colspan="2">
             <%= submit_tag @user.id.nil?? 'Create':'Update' %>
-            <%= link_to t(:label_cancel), { :controller => 'users', :action => 'index'}, { :class => 'action' } %><br/>
+            <%= link_to t('label_cancel'), { :controller => 'users', :action => 'index'}, { :class => 'action' } %><br/>
           </td>
         </tr>
 
@@ -83,14 +83,14 @@
 
 <button id="select_right_all" onclick="SelectBox.move_all('from', 'to');return false;">select all &raquo;</button><br><br>
 
-<%= link_to t(:label_export),
+<%= link_to t('label_export'),
  url_for(:controller => 'api/rules', :action => 'index', :language => @profile.language, :profile => @profile.name,
       :plugins => @plugins.join(','),
       :status => @status, :searchtext => @searchtext, :priorities => @priorities.join(','), :categories => @categories.join(','),
       :format => 'csv'),
  :class => 'action' %>&nbsp;&nbsp;Export
 
-<%= link_to_remote t(:label_add_event), {:url => { :controller => 'events', :action => "new", :rid => params['rid'] },
+<%= link_to_remote t('label_add_event'), {:url => { :controller => 'events', :action => "new", :rid => params['rid'] },
      :update => "event_form"}, {:class => 'action'} %>
 
 <td>
