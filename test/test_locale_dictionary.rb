@@ -1,5 +1,6 @@
 require 'helper'
 require 'stringio'
+require 'yaml'
 
 class TestLocaleDictionary < Test::Unit::TestCase
   should "save the result hash to yaml file" do

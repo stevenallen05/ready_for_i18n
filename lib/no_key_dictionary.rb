@@ -7,7 +7,7 @@ module ReadyForI18N
     end
 
     def push(key, value, path = nil)
-      @set << value if value && value.strip.present?
+      @set << value if value && !value.strip.empty?
     end
 
     def write_to(out)

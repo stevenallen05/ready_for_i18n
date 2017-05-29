@@ -9,5 +9,3 @@ require 'locale_dictionary'
 require 'no_key_dictionary'
 require 'key_mapper'
 require 'i18n_generator'
-
-require 'pry'
