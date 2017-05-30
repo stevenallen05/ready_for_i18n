@@ -11,17 +11,19 @@ module ReadyForI18N
     ]
     SKIP_INLINE_TAG = [
       /<script>(.*?)<\/script>/i,
-      /<%(.*?)%>/,
-      /<(.*?)>/,
-      /<(.*)$/,
-      /^(.*)>/,
+      /\s*\)?\s*:?\s<%(.*?)%>\s*\(?/,
+      /\s*\)?\s*:?\s*<(.*?)>\s*\(?/,
+      /\s*\)?\s*:?\s*<(.*)$/,
+      /^(.*)>\s*\(?/,
       /&nbsp;/
     ]
 
     protected
 
     def values_in_line(line)
-      SKIP_INLINE_TAG.inject(line.clone) { |memo, tag| memo.gsub(tag, SEPERATOR) }.strip.split SEPERATOR
+      SKIP_INLINE_TAG.inject(line.clone) do |memo, tag|
+        memo.gsub(tag, SEPERATOR)
+      end.strip.split SEPERATOR
     end
 
     def skip_line?(s)
@@ -60,7 +62,7 @@ module ReadyForI18N
     end
 
     def key_prefix
-      ENV.fetch('I18N_KEY_PREFIX', 'text')
+      ENV.fetch('I18N_KEY_PREFIX', nil)
     end
   end
 end

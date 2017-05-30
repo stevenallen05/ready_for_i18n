@@ -26,14 +26,18 @@ require 'optparse'
 require 'fileutils'
 require 'ready_for_i18n'
 
-def error_parameter
-  puts "Invalid options. Run `ready_for_i18n --help` for assistance."
-  exit(1)
-end
- 
 options = {}
 opts = OptionParser.new do |opts|
   opts.banner = help
+
+  opts.on("-d", "--destination [PATH]", "directory to stage results") do |path|
+    options['destination'] = path unless path.nil?
+  end
+
+  opts.on("-r", "--restrict_to [regexp]", "restrict to only paths matching") do |regexp|
+    options['restrict_to'] = regexp unless regexp.nil?
+  end
+
   opts.on("--locale [LOCALE]", "Generating for the specified locale (default locale 'en')") do |locale|
     options['locale'] = locale unless locale.nil?
   end
@@ -42,10 +46,30 @@ opts = OptionParser.new do |opts|
     options['extension'] = extension unless extension.nil?
   end
   
-  opts.on("--dot","Generate a structured dictionary file and support `Lazy` Lookup of Rails > 2.3 ") do |dot|
+  opts.on("--dot", "Generate a structured dictionary file and support `Lazy` Lookup of Rails > 2.3 ") do |dot|
     options['dot'] = true
   end
   
+  opts.on("--namespace [NAMESPACE]", "namespace to place extracted keys") do |namespace|
+    options['namespace'] = namespace unless namespace.nil?
+  end
+
+  opts.on("--area [area]", "area to place extracted keys") do |area|
+    options['area'] = area unless area.nil?
+  end
+
+  opts.on("--tool [tool]", "tool to place extracted keys") do |tool|
+    options['tool'] = tool unless tool.nil?
+  end
+
+  opts.on("--extractors [list]", "extractors to use") do |ex|
+    options['extractors'] = ex unless ex.nil?
+  end
+
+  opts.on("-f", "--locale_file [FILENAME]", "namespace to place extracted keys") do |locale_file|
+    options['locale_file'] = locale_file
+  end
+
   opts.on("--nokey",
     "Output only the text found in your view files but not generate the keys. Normally used for the non-english project") do |nokey|
     options['nokey'] = true
@@ -62,15 +86,7 @@ end
 opts.parse!
  
 # Get source and destintation from command line
-case ARGV.size
-  when 1
-    options['source']      = ARGV[0]
-  when 2
-    options['source']      = ARGV[0]
-    options['destination'] = ARGV[1]
-  else
-    error_parameter
-end
+options['source']      = ARGV[0]
  
 # Run the i18n generating
 ReadyForI18N::I18nGenerator.excute(options)
