@@ -11,7 +11,7 @@ module ReadyForI18N
 
     def push(key, value, path = nil)
       h = @hash
-      p [key, value, path]
+      # puts [key, value, path]
       path.each do |p|
         h[p] ||= {}
         h = h[p]
@@ -22,8 +22,8 @@ module ReadyForI18N
 
     def write_to(out)
       # out.puts "#{@locale}:"
-      out.puts({"#{@locale}" => @hash}.to_yaml)
-      fname = ['ready_for_I18n', namespace, area, tool].compact.join('_') + '.yml'
+      out.puts({"#{@locale}" => @hash}.to_yaml(:SortKeys => true))
+      fname = 'i18n_keys.yml' # ['ready_for_I18n', namespace, area, tool].compact.join('_') + '.yml'
       File.open(fname, 'w') {|f| f.write({@locale => @hash}.to_yaml(:SortKeys => true))}
     end
   end

@@ -5,8 +5,6 @@ module ReadyForI18N
     EXTRACTORS = [ErbHelperExtractor,HtmlTextExtractor,HtmlAttrExtractor]
     PATH_PATTERN = /\/views\/(.*)/
 
-
-
     def self.extractors(name = 'HtmlTextExtractor')
       if name =='all'
         EXTRACTORS
@@ -23,22 +21,26 @@ module ReadyForI18N
         next if f.match(/js.erb$/)
         
         next if @restrict_to && f.match(@restrict_to).nil?
-        # next if f.match(/app\/views\/company_area\///)
+        next if f.match(/app\/views\/company_area\//)
         
-        puts f
-        puts "------- loading file #{f}"
+        # puts f
+        # puts "------- loading file #{f}"
 
         if opt['dot'] && f =~ PATH_PATTERN
           path = f.match(PATH_PATTERN)[1].gsub(/#{@ext}$/,'').split '/'
           path[-1].gsub!(/(((^|\A)_)|\.\w+)/, '')
           path.unshift(@namespace) if @namespace && !@namespace.empty?
         else
-          path = [@namespace, @area, @tool].compact
-        end
-        debug "using path #{path}"
+          path =  if f.match(/(project|company)_area\/(\w+)\/?(.*)/)
+                    [@namespace, $1, $2].compact
+                    # [@namespace, @area, @tool].compact
+                  end
+                    [@namespace, @area, @tool].compact
+                  end
+        # debug "using path #{path}"
 
         result = extractors().inject(File.read(f)) do |buffer, extractor|
-          debug "using #{extractor} on  file #{f}"
+          # debug "using #{extractor} on  file #{f}"
           ex = extractor.new(namespace: @namespace, area: @area, tool: @tool,)
           ex.extract(buffer) { |key, phrase| @dict.push(key, phrase, path) }
         end
