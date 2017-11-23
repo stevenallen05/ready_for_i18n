@@ -12,6 +12,7 @@ module ReadyForI18N
     ]
     SKIP_INLINE_TAG = [
       /<script>(.*?)<\/script>/i,
+      /<i(.*?)<\/i>/i,
       /<%(.*?)%>/,
       /<(.*?)>/,
       /<(.*)$/,
