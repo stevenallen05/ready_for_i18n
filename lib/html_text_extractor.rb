@@ -6,7 +6,6 @@ module ReadyForI18N
 
     SKIP_TAGS = [
       [/<script/i, /<\/script>/i],
-      [/<script/i, /<\/script>/i],
       [/<i/i, /<\/i>/i],
       [/<%/, /%>/],
       [/<style/i, /\/style>/i]
@@ -15,6 +14,7 @@ module ReadyForI18N
       /<script>(.*?)<\/script>/i,
       /<%(.*?)%>/,
       /(.*?)=/,
+      /(.*?)<\/i>/,
       /<(.*?)>/,
       /<(.*)$/,
       /^(.*)>/,
